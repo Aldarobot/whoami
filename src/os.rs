@@ -1,10 +1,7 @@
 #![allow(unsafe_code)]
 
 // Daku
-#[cfg_attr(
-    all(target_arch = "wasm32", daku),
-    path = "os/daku.rs"
-)]
+#[cfg_attr(all(target_arch = "wasm32", daku), path = "os/daku.rs")]
 // Redox
 #[cfg_attr(
     all(target_os = "redox", not(target_arch = "wasm32")),
