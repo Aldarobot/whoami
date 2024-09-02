@@ -2,7 +2,7 @@
 
 // Daku
 #[cfg_attr(
-    all(target_arch = "wasm32", target_os = "daku"),
+    all(target_arch = "wasm32", daku),
     path = "os/daku.rs"
 )]
 // Redox
@@ -36,7 +36,7 @@
     all(
         target_arch = "wasm32",
         not(target_os = "wasi"),
-        not(target_os = "daku"),
+        not(daku),
         feature = "web",
     ),
     path = "os/web.rs"
