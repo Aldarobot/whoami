@@ -82,7 +82,7 @@ jobs:
     - run: cargo clippy --all-features --target=${{ matrix.cc }} -- -D warnings
     - run: cargo update
     - run: cargo clippy --no-default-features --target=${{ matrix.cc }} -- -D warnings
-    - run: RUSTFLAGS="--cfg target_os=\"daku\"" cargo clippy --target=${{ matrix.cc }} -- -D warnings
+    - run: RUSTFLAGS="--cfg daku" cargo clippy --target=${{ matrix.cc }} -- -D warnings
   test:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -185,7 +185,7 @@ jobs:
     - run: cargo build --all-features --target=${{ matrix.cc }}
     - run: cargo update
     - run: cargo build --no-default-features --target=${{ matrix.cc }}
-    - run: RUSTFLAGS="--cfg target_os=\"daku\"" cargo build --target=${{ matrix.cc }}
+    - run: RUSTFLAGS="--cfg daku" cargo build --target=${{ matrix.cc }}
   cross-compile-illumos:
     runs-on: ${{ matrix.os }}
     strategy:

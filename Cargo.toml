@@ -46,4 +46,4 @@ default = ["web"]
 web = ["web-sys"]
 
 [lints.rust]
-unexpected_cfgs = { level = "warn", check-cfg = ['cfg(daku)'] }
+unexpected_cfgs = { level = "allow", check-cfg = ['cfg(daku)'] }
