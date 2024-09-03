@@ -355,7 +355,7 @@ impl Target for Os {
 
         let mut version = MaybeUninit::<OsVersionInfoEx>::zeroed();
 
-        // FIXME `mem::size_of` seemingly false negative for lint
+        // FIXME `mem::size_of` seemingly false positive for lint
         #[allow(unused_qualifications)]
         let version = unsafe {
             (*version.as_mut_ptr()).os_version_info_size =

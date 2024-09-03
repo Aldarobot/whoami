@@ -116,9 +116,10 @@ extern "system" {
 }
 
 #[cfg(target_os = "macos")]
-#[link(name = "CoreFoundation")]
-#[link(name = "SystemConfiguration")]
-#[link(kind = "framework")]
+// FIXME: seemingly false positive for link lint
+#[allow(clippy::duplicated_attributes)]
+#[link(name = "CoreFoundation", kind = "framework")]
+#[link(name = "SystemConfiguration", kind = "framework")]
 extern "system" {
     fn CFStringGetCString(
         the_string: *mut c_void,
