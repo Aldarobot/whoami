@@ -357,7 +357,7 @@ impl Target for Os {
 
         let version = unsafe {
             (*version.as_mut_ptr()).os_version_info_size =
-                std::mem::size_of::<OsVersionInfoEx>() as u32;
+                size_of::<OsVersionInfoEx>() as u32;
             get_version(version.as_mut_ptr());
 
             if FreeLibrary(inst) == 0 {
