@@ -50,7 +50,7 @@ impl Target for Os {
 
     #[inline(always)]
     fn platform(self) -> Platform {
-        if cfg!(target_os = "daku") {
+        if cfg!(daku) {
             Platform::Unknown("Daku".to_string())
         } else if cfg!(target_os = "wasi") {
             Platform::Unknown("WASI".to_string())

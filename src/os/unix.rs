@@ -114,6 +114,8 @@ extern "system" {
 }
 
 #[cfg(target_os = "macos")]
+// FIXME: seemingly false positive for link lint
+#[allow(clippy::duplicated_attributes)]
 #[link(name = "CoreFoundation", kind = "framework")]
 #[link(name = "SystemConfiguration", kind = "framework")]
 extern "system" {

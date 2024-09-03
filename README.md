@@ -16,6 +16,7 @@ Retrieve the current user and environment through simple functions.
 Check out the [documentation][0] for examples.
 
 ### Features
+
  - Get the user's full name
  - Get the user's username
  - Get the user's preferred language(s)
@@ -27,7 +28,9 @@ Check out the [documentation][0] for examples.
  - Get the devices's CPU architecture and its width
 
 ### Supported Platforms
+
 WhoAmI targets all platforms that can run Rust, including:
+
  - Linux
  - Windows
  - Mac OS
@@ -45,6 +48,7 @@ WhoAmI targets all platforms that can run Rust, including:
  - Others? (make a PR or open an issue)
 
 ## MSRV
+
 WhoAmI 1.x.y targets Rust 1.40.0 stable and later, and the 1.x.y track will
 be maintained at least until the release of the Rust 2024 edition.
 
@@ -55,15 +59,18 @@ releases to be supported and receive bugfixes at least until sometime in 2027,
 bumping MSRV only as needed.
 
 ## Binary
+
 [whome](https://crates.io/crates/whome): `whoami` command RiR (Re-written in
 Rust) that depends on this crate.
 
 ## Testing
+
 The testing procedure is documented at
 <https://github.com/ardaku/whoami/blob/v1/TESTING.md>.  The full manual test
 suite is run for each change that affects multiple platforms.
 
 ## License
+
 Copyright © 2017-2024 The WhoAmI Contributors.
 
 Licensed under any of
@@ -76,11 +83,13 @@ Licensed under any of
 at your option.
 
 ### Contribution
+
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 licensed as described above, without any additional terms or conditions.
 
 ## Help
+
 If you want help using or contributing to this library, feel free to send me an
 email at [aldaronlau@gmail.com][13].
 

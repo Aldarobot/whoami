@@ -1,7 +1,7 @@
 use std::{
     ffi::OsString,
     io::{Error, ErrorKind},
-    mem::MaybeUninit,
+    mem::{self, MaybeUninit},
     os::{
         raw::{c_char, c_int, c_uchar, c_ulong, c_ushort, c_void},
         windows::ffi::OsStringExt,
@@ -350,13 +350,15 @@ impl Target for Os {
 
         let get_version: unsafe extern "system" fn(
             a: *mut OsVersionInfoEx,
-        ) -> u32 = unsafe { std::mem::transmute(func) };
+        ) -> u32 = unsafe { mem::transmute(func) };
 
         let mut version = MaybeUninit::<OsVersionInfoEx>::zeroed();
 
+        // FIXME `mem::size_of` seemingly false positive for lint
+        #[allow(unused_qualifications)]
         let version = unsafe {
             (*version.as_mut_ptr()).os_version_info_size =
-                std::mem::size_of::<OsVersionInfoEx>() as u32;
+                mem::size_of::<OsVersionInfoEx>() as u32;
             get_version(version.as_mut_ptr());
 
             if FreeLibrary(inst) == 0 {
