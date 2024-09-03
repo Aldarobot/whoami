@@ -116,11 +116,9 @@ extern "system" {
 }
 
 #[cfg(target_os = "macos")]
-#[link(
-    name = "CoreFoundation",
-    name = "SystemConfiguration",
-    kind = "framework"
-)]
+#[link(name = "CoreFoundation")]
+#[link(name = "SystemConfiguration")]
+#[link(kind = "framework")]
 extern "system" {
     fn CFStringGetCString(
         the_string: *mut c_void,
