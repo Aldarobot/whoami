@@ -33,7 +33,6 @@ jobs:
         - i686-unknown-linux-gnu
         - wasm32-wasi
         - x86_64-apple-darwin
-        - x86_64-unknown-redox
         - x86_64-unknown-illumos
     steps:
     - uses: actions/checkout@v2
@@ -203,7 +202,7 @@ jobs:
         override: true
     - run: cargo update
     - run: cargo build --all-features --target=${{ matrix.cc }}
-  cross-compile-redox:
+  cross-compile-redox-and-checks:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -220,3 +219,4 @@ jobs:
         override: true
     - run: cargo update
     - run: cargo build --all-features --target=${{ matrix.cc }}
+    - run: cargo clippy --all-features --target=${{ matrix.cc }} -- -D warnings

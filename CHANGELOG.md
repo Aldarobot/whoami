@@ -8,7 +8,9 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ### Changed
 
- - Update redox\_syscall to 0.5
+ - Updated redox\_syscall to 0.5
+ - Replace `target_os = daku` with `daku` cfg
+ - Improved repository documentation
 
 ## [1.5.1] - 2024-03-09
 
