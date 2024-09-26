@@ -97,3 +97,14 @@ pub fn devicename_os() -> Result<OsString> {
 pub fn hostname() -> Result<String> {
     Target::hostname(Os)
 }
+
+/// Get the host device's hostname, lowercased
+///
+/// Limited to a-z, 0-9 and dashes. This returns the same result as the
+/// deprecated [`whoami::hostname()`](crate::hostname).
+pub fn hostname_lower() -> Result<String> {
+    let mut hostname = hostname()?;
+
+    hostname.make_ascii_lowercase();
+    Ok(hostname)
+}
