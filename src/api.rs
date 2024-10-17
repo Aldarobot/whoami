@@ -78,8 +78,10 @@ pub fn devicename_os() -> OsString {
 
 /// Get the host device's hostname.
 ///
-/// Usually hostnames are case-insensitive, but it's
-/// not a hard requirement.
+/// This method normalizes to lowercase.  Usually hostnames are
+/// case-insensitive, but it's not a hard requirement.
+///
+/// FIXME: Document platform-specific character limitations
 ///
 /// Use [`fallible::hostname()`] for case-sensitive hostname.
 #[inline(always)]

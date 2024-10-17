@@ -92,6 +92,8 @@ pub fn devicename_os() -> Result<OsString> {
 ///
 /// Usually hostnames are case-insensitive, but it's
 /// not a hard requirement.
+///
+/// FIXME: Document platform-specific character limitations
 #[inline(always)]
 pub fn hostname() -> Result<String> {
     Target::hostname(Os)
