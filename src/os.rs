@@ -18,6 +18,7 @@
             target_os = "netbsd",
             target_os = "openbsd",
             target_os = "illumos",
+            target_os = "hurd",
         ),
         not(target_arch = "wasm32")
     ),
