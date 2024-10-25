@@ -22,6 +22,7 @@ pub enum Platform {
     PlayStation,
     Fuchsia,
     Redox,
+    Hurd,
     Unknown(String),
 }
 
@@ -44,6 +45,7 @@ impl Display for Platform {
             Self::PlayStation => "PlayStation",
             Self::Fuchsia => "Fuchsia",
             Self::Redox => "Redox",
+            Self::Hurd => "GNU Hurd",
             Self::Unknown(a) => a,
         })
     }

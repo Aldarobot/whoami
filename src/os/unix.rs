@@ -7,6 +7,7 @@ use std::convert::TryInto;
     target_os = "netbsd",
     target_os = "openbsd",
     target_os = "illumos",
+    target_os = "hurd",
 ))]
 use std::env;
 use std::{
@@ -34,7 +35,7 @@ use crate::{
     Arch, DesktopEnv, Platform, Result,
 };
 
-#[cfg(target_os = "linux")]
+#[cfg(any(target_os = "linux", target_os = "hurd",))]
 #[repr(C)]
 struct PassWd {
     pw_name: *const c_void,
@@ -99,6 +100,7 @@ extern "system" {
     target_os = "freebsd",
     target_os = "netbsd",
     target_os = "openbsd",
+    target_os = "hurd",
 ))]
 extern "system" {
     fn getpwuid_r(
@@ -250,6 +252,7 @@ fn getpwuid(name: Name) -> Result<OsString> {
             target_os = "freebsd",
             target_os = "netbsd",
             target_os = "openbsd",
+            target_os = "hurd",
         ))]
         {
             let mut _passwd = mem::MaybeUninit::<*mut PassWd>::uninit();
@@ -403,6 +406,16 @@ struct UtsName {
     domainname: [c_char; 65],
 }
 
+#[cfg(target_os = "hurd")]
+#[repr(C)]
+struct UtsName {
+    sysname: [c_char; 1024],
+    nodename: [c_char; 1024],
+    release: [c_char; 1024],
+    version: [c_char; 1024],
+    machine: [c_char; 1024],
+}
+
 // Buffer initialization
 impl Default for UtsName {
     fn default() -> Self {
@@ -420,6 +433,7 @@ unsafe fn uname(buf: *mut UtsName) -> c_int {
             target_os = "netbsd",
             target_os = "openbsd",
             target_os = "illumos",
+            target_os = "hurd",
         ))]
         fn uname(buf: *mut UtsName) -> c_int;
 
@@ -486,6 +500,7 @@ impl Target for Os {
             target_os = "freebsd",
             target_os = "netbsd",
             target_os = "openbsd",
+            target_os = "hurd",
         ))]
         {
             let machine_info = fs::read("/etc/machine-info")?;
@@ -545,6 +560,7 @@ impl Target for Os {
             target_os = "netbsd",
             target_os = "openbsd",
             target_os = "illumos",
+            target_os = "hurd",
         ))]
         {
             let program = fs::read("/etc/os-release")?;
@@ -591,6 +607,7 @@ impl Target for Os {
             target_os = "netbsd",
             target_os = "openbsd",
             target_os = "illumos",
+            target_os = "hurd",
         ))]
         let env = env::var_os("DESKTOP_SESSION");
         #[cfg(any(
@@ -600,6 +617,7 @@ impl Target for Os {
             target_os = "netbsd",
             target_os = "openbsd",
             target_os = "illumos",
+            target_os = "hurd",
         ))]
         let env = if let Some(ref env) = env {
             env.to_string_lossy()
@@ -652,6 +670,11 @@ impl Target for Os {
         #[cfg(target_os = "illumos")]
         {
             Platform::Illumos
+        }
+
+        #[cfg(target_os = "hurd")]
+        {
+            Platform::Hurd
         }
     }
 

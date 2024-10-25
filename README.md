@@ -45,6 +45,7 @@ WhoAmI targets all platforms that can run Rust, including:
  - Android **planned later**
  - iOS / watchOS / tvOS **planned later**
  - Fuchsia **planned later**
+ - GNU/Hurd **untested**
  - Others? (make a PR or open an issue)
 
 ## MSRV
