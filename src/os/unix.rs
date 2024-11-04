@@ -8,22 +8,18 @@
 ))]
 use std::env;
 use std::{
+    ffi::{c_char, c_int},
     ffi::{c_void, CStr, OsString},
     fs,
     io::{Error, ErrorKind},
     mem,
-    os::{
-        raw::{c_char, c_int},
-        unix::ffi::OsStringExt,
-    },
+    os::unix::ffi::OsStringExt,
     slice,
 };
 #[cfg(target_os = "macos")]
 use std::{
-    os::{
-        raw::{c_long, c_uchar},
-        unix::ffi::OsStrExt,
-    },
+    ffi::{c_long, c_uchar},
+    os::unix::ffi::OsStrExt,
     ptr::null_mut,
 };
 
