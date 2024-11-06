@@ -8,8 +8,7 @@
 ))]
 use std::env;
 use std::{
-    ffi::{c_char, c_int},
-    ffi::{c_void, CStr, OsString},
+    ffi::{c_char, c_int, c_void, CStr, OsString},
     fs,
     io::{Error, ErrorKind},
     mem,

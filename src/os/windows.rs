@@ -1,6 +1,5 @@
 use std::{
-    ffi::OsString,
-    ffi::{c_char, c_int, c_uchar, c_ulong, c_ushort, c_void},
+    ffi::{c_char, c_int, c_uchar, c_ulong, c_ushort, c_void, OsString},
     io::{Error, ErrorKind},
     mem::MaybeUninit,
     os::windows::ffi::OsStringExt,
