@@ -50,7 +50,7 @@ impl Target for Os {
 
     #[inline(always)]
     fn platform(self) -> Platform {
-        if cfg!(target_os = "daku") {
+        if cfg!(daku) {
             Platform::Unknown("Daku".to_string())
         } else if cfg!(target_os = "wasi") {
             Platform::Unknown("WASI".to_string())
@@ -92,7 +92,7 @@ impl Target for Os {
         } else if cfg!(target_os = "vita") {
             Platform::PlayStation
         } else if cfg!(target_os = "hurd") {
-            Platform::Unknown("GNU Hurd".to_string())
+            Platform::Hurd
         } else if cfg!(target_os = "aix") {
             Platform::Unknown("AIX OS".to_string())
         } else if cfg!(target_os = "espidf") {

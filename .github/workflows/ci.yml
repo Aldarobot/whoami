@@ -31,10 +31,8 @@ jobs:
         - i686-pc-windows-gnu
         - i686-unknown-freebsd
         - i686-unknown-linux-gnu
-        - wasm32-wasi
+        - wasm32-wasip1
         - x86_64-apple-darwin
-        - x86_64-unknown-redox
-        - x86_64-unknown-illumos
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
@@ -82,7 +80,7 @@ jobs:
     - run: cargo clippy --all-features --target=${{ matrix.cc }} -- -D warnings
     - run: cargo update
     - run: cargo clippy --no-default-features --target=${{ matrix.cc }} -- -D warnings
-    - run: RUSTFLAGS="--cfg target_os=\"daku\"" cargo clippy --target=${{ matrix.cc }} -- -D warnings
+    - run: RUSTFLAGS="--cfg daku" cargo clippy --target=${{ matrix.cc }} -- -D warnings
   test:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -111,19 +109,43 @@ jobs:
         toolchain: ${{ matrix.tc }}
         override: true
     - run: cargo update
-    - run: cargo test --all --all-features --target=x86_64-apple-darwin
-  cross-compile:
+    - run: cargo test --all --all-features
+  # TODO: can be merged back into "cross-compile" after MSRV bumped to 1.78
+  # only difference is wasi -> wasip1
+  cross-compile-msrv:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest]
-        tc: [1.65.0, stable, beta, nightly]
+        tc: [1.65.0]
         cc:
         - aarch64-linux-android
         - i686-pc-windows-gnu
         - i686-unknown-freebsd
         - i686-unknown-linux-gnu
         - wasm32-wasi
+        - x86_64-apple-darwin
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: ${{ matrix.tc }}
+        target: ${{ matrix.cc }}
+        override: true
+    - run: cargo build --all-features --target=${{ matrix.cc }}
+  cross-compile:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        tc: [stable, beta, nightly]
+        cc:
+        - aarch64-linux-android
+        - i686-pc-windows-gnu
+        - i686-unknown-freebsd
+        - i686-unknown-linux-gnu
+        - wasm32-wasip1
         - x86_64-apple-darwin
     steps:
     - uses: actions/checkout@v2
@@ -185,8 +207,8 @@ jobs:
     - run: cargo build --all-features --target=${{ matrix.cc }}
     - run: cargo update
     - run: cargo build --no-default-features --target=${{ matrix.cc }}
-    - run: RUSTFLAGS="--cfg target_os=\"daku\"" cargo build --target=${{ matrix.cc }}
-  cross-compile-illumos:
+    - run: RUSTFLAGS="--cfg daku" cargo build --target=${{ matrix.cc }}
+  cross-compile-illumos-and-checks:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -198,12 +220,13 @@ jobs:
     - uses: actions-rs/toolchain@v1
       with:
         profile: minimal
+        components: clippy
         toolchain: ${{ matrix.tc }}
         target: ${{ matrix.cc }}
         override: true
-    - run: cargo update
     - run: cargo build --all-features --target=${{ matrix.cc }}
-  cross-compile-redox:
+    - run: cargo clippy --all-features --target=${{ matrix.cc }} -- -D warnings
+  cross-compile-redox-and-checks:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -215,8 +238,9 @@ jobs:
     - uses: actions-rs/toolchain@v1
       with:
         profile: minimal
+        components: clippy
         toolchain: ${{ matrix.tc }}
         target: ${{ matrix.cc }}
         override: true
-    - run: cargo update
     - run: cargo build --all-features --target=${{ matrix.cc }}
+    - run: cargo clippy --all-features --target=${{ matrix.cc }} -- -D warnings

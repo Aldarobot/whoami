@@ -72,9 +72,9 @@ pub fn realname_os() -> Result<OsString> {
 
 /// Get the host device's hostname.
 ///
-/// Limited to a-z, A-Z, 0-9, and dashes.  This limit also applies to
-/// [`devicename()`] when targeting Windows.  Usually hostnames are
-/// case-insensitive, but it's not a hard requirement.
+/// Usually hostnames are case-insensitive, but it's not a hard requirement.
+///
+/// FIXME: Document platform-specific character limitations
 #[inline(always)]
 pub fn hostname() -> Result<String> {
     Target::hostname(Os)
@@ -130,19 +130,19 @@ pub fn langs() -> Result<impl Iterator<Item = Language>> {
     let langs = langs
         .split(';')
         .map(ToString::to_string)
-        .collect::<Vec<_>>();
+        .filter_map(|lang| {
+            let lang = lang
+                .split_terminator('.')
+                .next()
+                .unwrap_or_default()
+                .replace(|x| ['_', '-'].contains(&x), "/");
 
-    Ok(langs.into_iter().filter_map(|lang| {
-        let lang = lang
-            .split_terminator('.')
-            .next()
-            .unwrap_or_default()
-            .replace(|x| ['_', '-'].contains(&x), "/");
+            if lang == "C" {
+                return None;
+            }
 
-        if lang == "C" {
-            return None;
-        }
+            Some(Language::__(Box::new(lang)))
+        });
 
-        Some(Language::__(Box::new(lang)))
-    }))
+    Ok(langs.collect::<Vec<_>>().into_iter())
 }

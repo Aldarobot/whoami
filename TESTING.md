@@ -282,7 +282,7 @@ Device's CPU Arch      whoami::arch():                Unknown: i86pc
 
 <https://doc.redox-os.org/book/ch08-01-advanced-build.html#understanding-cross-compilation-for-redox>
 
-Tested on Fedora Silverblue 39
+Tested on Fedora Silverblue 40
 
 ### Update Rust Nightly and Stable
 
@@ -294,7 +294,7 @@ rustup target add --toolchain stable x86_64-unknown-redox
 ### Install pre-requisites
 
 ```shell
-sudo dnf install git file autoconf vim bison flex genisoimage gperf glibc-devel.i686 expat expat-devel fuse-devel fuse3-devel gmp-devel perl-HTML-Parser libpng-devel libtool libjpeg-turbo-devel libvorbis-devel SDL2_ttf-devel mesa-libOSMesa-devel m4 nasm po4a syslinux texinfo sdl12-compat-devel ninja-build meson python3-mako make gcc gcc-c++ openssl patch automake perl-Pod-Html perl-FindBin gperf curl gettext-devel perl-Pod-Xhtml pkgconf-pkg-config cmake cbindgen just qemu doxygen 'perl(ExtUtils::MakeMaker)'
+sudo dnf install git file autoconf vim bison flex genisoimage gperf glibc-devel.i686 expat expat-devel fuse-devel fuse3-devel gmp-devel perl-HTML-Parser libpng-devel libtool libjpeg-turbo-devel libvorbis-devel SDL2_ttf-devel mesa-libOSMesa-devel m4 nasm po4a syslinux texinfo sdl12-compat-devel ninja-build meson python3-mako make gcc gcc-c++ openssl patch automake perl-Pod-Html perl-FindBin gperf curl gettext-devel perl-Pod-Xhtml pkgconf-pkg-config cmake cbindgen just mpfr-devel qemu doxygen 'perl(ExtUtils::MakeMaker)'
 
 cargo install --locked --force --version 0.1.1 cargo-config
 ```
@@ -305,27 +305,37 @@ cargo install --locked --force --version 0.1.1 cargo-config
 mkdir -p build/
 cd build/
 git clone https://gitlab.redox-os.org/redox-os/redox.git --origin upstream --recursive
+cd redox
+git submodule update --recursive --init
 ```
 
 ### Create our demo recipe
 
-Make sure whome is updated to the whoami testing branch.
+Back in the root whoami directory, make sure whome is updated to the whoami
+testing branch.
 
 ```shell
 mkdir -p build/redox/cookbook/recipes/demos/whome/
 cp recipe.toml build/redox/cookbook/recipes/demos/whome/
-cp build/redox/config/desktop.toml config/x86_64/ardaku.toml
+cp build/redox/config/desktop.toml build/redox/config/x86_64/ardaku.toml
 ```
 
-In `config/x86_64/ardaku.toml`, under `[packages]`:
+In `build/redox/config/x86_64/ardaku.toml`, under `[packages]`, add:
 
 ```toml
 whome = {}
 ```
 
+### Select the config
+IN `build/redox/mk/config.mk`, set:
+
+```make
+CONFIG_NAME?=ardaku
+```
+
 ### Build Redox
 
-This takes a while
+Back in `cd build/redox`, this takes a while
 
 ```shell
 make all
@@ -358,7 +368,7 @@ realname:     user
 username:     user
 devicename:   redox
 hostname:     redox
-distro:       Redox OS 0.8.0
+distro:       Redox OS 0.9.0
 desktop_env:  Orbital
 platform:     Redox
 arch:         Unknown: x86_64
