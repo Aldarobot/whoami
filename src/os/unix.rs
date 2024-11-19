@@ -8,6 +8,15 @@
     target_os = "hurd",
 ))]
 use std::env;
+#[cfg(target_os = "macos")]
+use std::{
+    ffi::OsStr,
+    os::{
+        raw::{c_long, c_uchar},
+        unix::ffi::OsStrExt,
+    },
+    ptr::null_mut,
+};
 use std::{
     ffi::{c_void, CStr, OsString},
     fs,
@@ -18,14 +27,6 @@ use std::{
         unix::ffi::OsStringExt,
     },
     slice,
-};
-#[cfg(target_os = "macos")]
-use std::{
-    os::{
-        raw::{c_long, c_uchar},
-        unix::ffi::OsStrExt,
-    },
-    ptr::null_mut,
 };
 
 use crate::{
@@ -589,11 +590,10 @@ impl Target for Os {
         }
     }
 
-    fn desktop_env(self) -> DesktopEnv {
+    fn desktop_env(self) -> Option<DesktopEnv> {
         #[cfg(target_os = "macos")]
-        let env = "Aqua";
+        let env = OsStr::new("Aqua");
 
-        // FIXME: use `let else`
         #[cfg(any(
             target_os = "linux",
             target_os = "dragonfly",
@@ -603,23 +603,12 @@ impl Target for Os {
             target_os = "illumos",
             target_os = "hurd",
         ))]
-        let env = env::var_os("DESKTOP_SESSION");
-        #[cfg(any(
-            target_os = "linux",
-            target_os = "dragonfly",
-            target_os = "freebsd",
-            target_os = "netbsd",
-            target_os = "openbsd",
-            target_os = "illumos",
-            target_os = "hurd",
-        ))]
-        let env = if let Some(ref env) = env {
-            env.to_string_lossy()
-        } else {
-            return DesktopEnv::Unknown("Unknown".to_string());
-        };
+        let env = env::var_os("DESKTOP_SESSION")?;
 
-        if env.eq_ignore_ascii_case("AQUA") {
+        // convert `OsStr` to `Cow`
+        let env = env.to_string_lossy();
+
+        Some(if env.eq_ignore_ascii_case("AQUA") {
             DesktopEnv::Aqua
         } else if env.eq_ignore_ascii_case("GNOME") {
             DesktopEnv::Gnome
@@ -636,7 +625,7 @@ impl Target for Os {
         // TODO: Other Linux Desktop Environments
         } else {
             DesktopEnv::Unknown(env.to_string())
-        }
+        })
     }
 
     #[inline(always)]

@@ -160,8 +160,8 @@ impl Target for Os {
     }
 
     #[inline(always)]
-    fn desktop_env(self) -> DesktopEnv {
-        DesktopEnv::WebBrowser
+    fn desktop_env(self) -> Option<DesktopEnv> {
+        Some(DesktopEnv::WebBrowser)
     }
 
     fn platform(self) -> Platform {

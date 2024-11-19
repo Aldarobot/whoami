@@ -44,8 +44,8 @@ impl Target for Os {
     }
 
     #[inline(always)]
-    fn desktop_env(self) -> DesktopEnv {
-        DesktopEnv::Unknown("Unknown".to_string())
+    fn desktop_env(self) -> Option<DesktopEnv> {
+        None
     }
 
     #[inline(always)]

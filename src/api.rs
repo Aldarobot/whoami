@@ -1,4 +1,4 @@
-use std::ffi::OsString;
+use std::{env, ffi::OsString};
 
 use crate::{
     conversions,
@@ -104,11 +104,21 @@ pub fn distro() -> Result<String> {
     Target::distro(Os)
 }
 
-/// Get the desktop environment.
+/// Get the desktop environment (if any).
 ///
 /// Example: "gnome" or "windows"
+///
+/// Returns `None` if a desktop environment is not available (for example in a
+/// TTY or over SSH)
 #[inline(always)]
-pub fn desktop_env() -> DesktopEnv {
+pub fn desktop_env() -> Option<DesktopEnv> {
+    if env::var_os("SSH_CLIENT").is_some()
+        || env::var_os("SSH_TTY").is_some()
+        || env::var_os("SSH_CONNECTION").is_some()
+    {
+        return None;
+    }
+
     Target::desktop_env(Os)
 }
 

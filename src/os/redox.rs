@@ -130,8 +130,8 @@ impl Target for Os {
     }
 
     #[inline(always)]
-    fn desktop_env(self) -> DesktopEnv {
-        DesktopEnv::Orbital
+    fn desktop_env(self) -> Option<DesktopEnv> {
+        Some(DesktopEnv::Orbital)
     }
 
     #[inline(always)]

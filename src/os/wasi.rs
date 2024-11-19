@@ -45,12 +45,9 @@ impl Target for Os {
     }
 
     #[inline(always)]
-    fn desktop_env(self) -> DesktopEnv {
-        if let Some(ref env) = env::var_os("DESKTOP_SESSION") {
-            DesktopEnv::Unknown(env.to_string_lossy().to_string())
-        } else {
-            DesktopEnv::Unknown("Unknown WASI".to_string())
-        }
+    fn desktop_env(self) -> Option<DesktopEnv> {
+        env::var_os("DESKTOP_SESSION")
+            .map(|env| DesktopEnv::Unknown(env.to_string_lossy().to_string()))
     }
 
     #[inline(always)]
