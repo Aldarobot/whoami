@@ -385,8 +385,8 @@ impl Target for Os {
     }
 
     #[inline(always)]
-    fn desktop_env(self) -> DesktopEnv {
-        DesktopEnv::Windows
+    fn desktop_env(self) -> Option<DesktopEnv> {
+        Some(DesktopEnv::Windows)
     }
 
     #[inline(always)]

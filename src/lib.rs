@@ -47,7 +47,9 @@
 //! );
 //! println!(
 //!     "Device's Desktop Env.  whoami::desktop_env():         {}",
-//!     whoami::desktop_env(),
+//!     whoami::desktop_env()
+//!         .map(|e| e.to_string())
+//!         .unwrap_or_else(|| "<unknown>".to_string()),
 //! );
 //! println!(
 //!     "Device's CPU Arch      whoami::arch():                {}",

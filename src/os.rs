@@ -72,7 +72,7 @@ pub(crate) trait Target: Sized {
     /// Return the OS distribution's name.
     fn distro(self) -> Result<String>;
     /// Return the desktop environment.
-    fn desktop_env(self) -> DesktopEnv;
+    fn desktop_env(self) -> Option<DesktopEnv>;
     /// Return the target platform.
     fn platform(self) -> Platform;
     /// Return the computer's CPU architecture.
