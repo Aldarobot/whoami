@@ -97,8 +97,8 @@ licensed as described above, without any additional terms or conditions.
 If you want help using or contributing to this library, feel free to send me an
 email at <aldaronlau@gmail.com>.
 
-[Changelog]: https://github.com/ardaku/whoami/blob/v2/CHANGELOG.md
-[Source]: https://github.com/ardaku/whoami/
+[Changelog]: https://github.com/ardaku/whoami/releases
+[Source]: https://github.com/ardaku/whoami
 [Getting Started]: https://docs.rs/whoami#getting-started
 [documentation]: https://docs.rs/whoami
 [LICENSE_APACHE]: https://github.com/ardaku/whoami/blob/v2/LICENSE_APACHE
