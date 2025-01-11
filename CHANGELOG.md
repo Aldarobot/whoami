@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning].
 
+## [1.6.0] - Unreleased
+
+### Added
+
+ - Support for GNU/Hurd
+
+### Changed
+
+ - Removed comment about hostname being limited to ASCII
+
 ## [1.5.2] - 2024-09-02
 
 ### Changed
