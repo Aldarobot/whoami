@@ -72,7 +72,7 @@ suite is run for each change that affects multiple platforms.
 
 ## License
 
-Copyright © 2017-2024 The WhoAmI Contributors.
+Copyright © 2017-2025 The WhoAmI Contributors.
 
 Licensed under any of
  - Apache License, Version 2.0, ([LICENSE_APACHE][7]
