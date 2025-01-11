@@ -104,7 +104,7 @@ email at <aldaronlau@gmail.com>.
 [LICENSE_APACHE]: https://github.com/ardaku/whoami/blob/v2/LICENSE_APACHE
 [LICENSE_MIT]: https://github.com/ardaku/whoami/blob/v2/LICENSE_MIT
 [LICENSE_BOOST]: https://github.com/ardaku/whoami/blob/v2/LICENSE_BOOST
-[Ardaku MSRV guidelines]: https://github.com/ardaku/.github/blob/v2/profile/MSRV.md
+[Ardaku MSRV guidelines]: https://github.com/ardaku/.github/blob/v1/profile/MSRV.md
 [WhoAmI Logo]: https://raw.githubusercontent.com/ardaku/whoami/v2/res/icon.svg
 [Web Assembly]: https://github.com/ardaku/whoami/blob/v2/WASM.md
 [whome]: https://crates.io/crates/whome
