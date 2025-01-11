@@ -1,11 +1,8 @@
 use std::{
-    ffi::OsString,
+    ffi::{c_char, c_int, c_uchar, c_ulong, c_ushort, c_void, OsString},
     io::{Error, ErrorKind},
     mem::{self, MaybeUninit},
-    os::{
-        raw::{c_char, c_int, c_uchar, c_ulong, c_ushort, c_void},
-        windows::ffi::OsStringExt,
-    },
+    os::windows::ffi::OsStringExt,
     ptr,
 };
 
