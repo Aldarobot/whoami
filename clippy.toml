@@ -1,0 +1,59 @@
+[[disallowed-types]]
+path = "std::os::raw::c_char"
+reason = "Use ffi::c_char"
+
+[[disallowed-types]]
+path = "std::os::raw::c_double"
+reason = "Use ffi::c_double"
+
+[[disallowed-types]]
+path = "std::os::raw::c_float"
+reason = "Use ffi::c_float"
+
+[[disallowed-types]]
+path = "std::os::raw::c_int"
+reason = "Use ffi::c_int"
+
+[[disallowed-types]]
+path = "std::os::raw::c_long"
+reason = "Use ffi::c_long"
+
+[[disallowed-types]]
+path = "std::os::raw::c_longlong"
+reason = "Use ffi::c_longlong"
+
+[[disallowed-types]]
+path = "std::os::raw::c_schar"
+reason = "Use ffi::c_schar"
+
+[[disallowed-types]]
+path = "std::os::raw::c_short"
+reason = "Use ffi::c_short"
+
+[[disallowed-types]]
+path = "std::os::raw::c_uchar"
+reason = "Use ffi::c_uchar"
+
+[[disallowed-types]]
+path = "std::os::raw::c_uint"
+reason = "Use ffi::c_uint"
+
+[[disallowed-types]]
+path = "std::os::raw::c_ulong"
+reason = "Use ffi::c_ulong"
+
+[[disallowed-types]]
+path = "std::os::raw::c_ulonglong"
+reason = "Use ffi::c_ulonglong"
+
+[[disallowed-types]]
+path = "std::os::raw::c_ushort"
+reason = "Use ffi::c_ushort"
+
+[[disallowed-types]]
+path = "std::os::raw::c_void"
+reason = "Use ffi::c_void"
+
+[[disallowed-macros]]
+path = "std::vec"
+reason = "Use .to_vec() on arrays or array.into() to convert to vec"
