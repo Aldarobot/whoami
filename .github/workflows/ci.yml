@@ -208,7 +208,7 @@ jobs:
     - run: cargo update
     - run: cargo build --no-default-features --target=${{ matrix.cc }}
     - run: RUSTFLAGS="--cfg daku" cargo build --target=${{ matrix.cc }}
-  cross-compile-illumos-and-checks:
+  cross-compile-illumos:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -220,13 +220,11 @@ jobs:
     - uses: actions-rs/toolchain@v1
       with:
         profile: minimal
-        components: clippy
         toolchain: ${{ matrix.tc }}
         target: ${{ matrix.cc }}
         override: true
     - run: cargo build --all-features --target=${{ matrix.cc }}
-    - run: cargo clippy --all-features --target=${{ matrix.cc }} -- -D warnings
-  cross-compile-redox-and-checks:
+  cross-compile-redox:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -238,9 +236,26 @@ jobs:
     - uses: actions-rs/toolchain@v1
       with:
         profile: minimal
-        components: clippy
         toolchain: ${{ matrix.tc }}
         target: ${{ matrix.cc }}
         override: true
     - run: cargo build --all-features --target=${{ matrix.cc }}
+  clippy-cross-compile:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        tc: [nightly]
+        cc:
+        - x86_64-unknown-illumos
+        - x86_64-unknown-redox
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        components: clippy
+        toolchain: ${{ matrix.tc }}
+        target: ${{ matrix.cc }}
+        override: true
     - run: cargo clippy --all-features --target=${{ matrix.cc }} -- -D warnings
