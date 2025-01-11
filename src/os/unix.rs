@@ -8,25 +8,19 @@
     target_os = "hurd",
 ))]
 use std::env;
-#[cfg(target_os = "macos")]
 use std::{
-    ffi::OsStr,
-    os::{
-        raw::{c_long, c_uchar},
-        unix::ffi::OsStrExt,
-    },
-    ptr::null_mut,
-};
-use std::{
-    ffi::{c_void, CStr, OsString},
+    ffi::{c_char, c_int, c_void, CStr, OsString},
     fs,
     io::{Error, ErrorKind},
     mem,
-    os::{
-        raw::{c_char, c_int},
-        unix::ffi::OsStringExt,
-    },
+    os::unix::ffi::OsStringExt,
     slice,
+};
+#[cfg(target_os = "macos")]
+use std::{
+    ffi::{c_long, c_uchar, OsStr},
+    os::unix::ffi::OsStrExt,
+    ptr::null_mut,
 };
 
 use crate::{
