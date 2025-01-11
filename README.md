@@ -35,8 +35,8 @@ WhoAmI targets all platforms that can run Rust, including:
  - Windows
  - Mac OS
  - BSD variants (FreeBSD, others)
- - illumos variants (SmartOS, OmniOS, others) **Target-Specific MSRV 1.65**
- - Redox **Target-Specific MSRV 1.65**
+ - illumos variants (SmartOS, OmniOS, others)
+ - Redox
  - [Web Assembly]
    - Fake implementation
    - Web Browser - DOM
