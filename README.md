@@ -50,18 +50,15 @@ WhoAmI targets all platforms that can run Rust, including:
 
 ## MSRV
 
-The current MSRV of WhoAmI is Rust 1.65.
+MSRV is updated according to the [Ardaku MSRV guidelines], so it will only get
+updated on minor and major version bumps.  All 2.x releases will be maintained
+with bugfixes until the end of 2027 at minimum.
 
-MSRV is updated according to the [Ardaku MSRV guidelines].
-
-### Support
-
-If you need to support earlier version of Rust, WhoAmI 1.x.y targets Rust 1.40.0
-stable and later, and the 1.x.y track will be maintained at least until the
-release of the Rust 2024 edition.
-
-All 2.x releases will be supported and receive bugfixes at least until sometime
-in 2027.
+ - WhoAmI 2.2: Rust 1.85 MSRV (bump to get the 2024 edition)
+ - WhoAmI 2.1: Rust 1.75 MSRV (bump to pull in nix, etc.)
+ - WhoAmI 2.0: Rust 1.65 MSRV (support based on original 2.0 plan)
+ - WhoAmI 1.x: Rust 1.40 MSRV (old MSRV policy, maintained until end of 2025 at
+   minimum)
 
 ## Binary
 
